@@ -24,6 +24,7 @@ const eslintConfig = defineConfig([
 			'**/public/**'
 		],
 		rules: {
+			'react-hooks/exhaustive-deps': 'warn',
 			'no-unused-vars': 'off',
 			'@typescript-eslint/no-unused-vars': [
 				'error',
