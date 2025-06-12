@@ -10,3 +10,18 @@ export type Product = {
 		count: number;
 	};
 };
+
+export type ProductsFilters = {
+	categories: string[];
+	price: {
+		min: number;
+		max: number;
+	};
+};
+
+export type ProductsSorting = {
+	id: `${number}`;
+	label: string;
+	name: string;
+	value: string | null;
+};

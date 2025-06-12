@@ -5,7 +5,7 @@ import type {
 	WithContext,
 	CollectionPage
 } from 'schema-dts';
-import { Product } from '@/types';
+import { Product } from '@Types';
 
 const JsonSchema = <T extends Thing>({ json }: { json: WithContext<T> }) => {
 	return (

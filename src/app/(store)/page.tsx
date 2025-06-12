@@ -1,11 +1,34 @@
-'use server';
-import getAxiosClient from '@/utils/getAxiosClient';
-import { apiEndpoints } from '@/config';
+import getAxiosClient from '@Utils/getAxiosClient';
+import { apiEndpoints } from '@Config';
 import Head from 'next/head';
-import { JsonSchema, ProductList } from '@/components';
-import { getProductsJson } from '@/components/JsonSchema';
-import { Product } from '@/types';
-// import Error from 'next/error';
+import { JsonSchema, Products } from '@Components';
+import { getProductsJson } from '@Components/JsonSchema';
+import { Product } from '@Types';
+
+const getCategories = async () => {
+	try {
+		const axiosClient = getAxiosClient();
+		const { data } = await axiosClient.get<string[]>(
+			apiEndpoints.getCategories(),
+			{
+				fetchOptions: {
+					cache: 'force-cache'
+				}
+			}
+		);
+		return data
+			? { categories: data, hasError: false }
+			: {
+					categories: [],
+					hasError: true
+				};
+	} catch (_) {
+		return {
+			categories: [],
+			hasError: true
+		};
+	}
+};
 
 const getProducts = async () => {
 	try {
@@ -19,7 +42,7 @@ const getProducts = async () => {
 					products: [],
 					hasError: true
 				};
-	} catch (err) {
+	} catch (_) {
 		return {
 			products: [],
 			hasError: true
@@ -28,13 +51,14 @@ const getProducts = async () => {
 };
 
 export default async function Page() {
-	const { products, hasError } = await getProducts();
+	const { categories } = await getCategories();
+	const { products } = await getProducts();
 	return (
 		<>
 			<Head>
 				<JsonSchema json={getProductsJson(products)} />
 			</Head>
-			<ProductList products={products} />
+			<Products categories={categories} products={products} />
 		</>
 	);
 }

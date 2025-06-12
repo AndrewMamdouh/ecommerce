@@ -1,2 +1,3 @@
-export { default as ProductList } from './ProductList';
 export { default as JsonSchema } from './JsonSchema';
+export { default as Navbar } from './Navbar';
+export { default as Products } from './Products';
