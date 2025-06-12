@@ -8,8 +8,7 @@
     "start": "next start",
     "lint:check": "eslint . --config eslint.config.mjs --quiet --debug",
     "lint:fix": "eslint . --fix --quiet",
-    "type:check": "tsc --project tsconfig.json",
-    "postinstall": "flowbite-react patch"
+    "type:check": "tsc --project tsconfig.json"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.4",
