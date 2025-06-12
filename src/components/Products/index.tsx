@@ -73,6 +73,15 @@ const Products = ({ categories, products }: ProductsProps) => {
 		}
 	};
 
+	const onResetFilters = () =>
+		setActiveFilter({
+			categories,
+			price: {
+				min: low.price,
+				max: high.price
+			}
+		});
+
 	return (
 		<div className="overflow-hidden bg-white">
 			<div>
@@ -82,6 +91,7 @@ const Products = ({ categories, products }: ProductsProps) => {
 					categories={categories}
 					activeFilter={activeFilter}
 					onFilterChange={handleFilterChange}
+					onReset={onResetFilters}
 					minPrice={low.price}
 					maxPrice={high.price}
 				/>
@@ -121,6 +131,7 @@ const Products = ({ categories, products }: ProductsProps) => {
 									categories={categories}
 									activeFilter={activeFilter}
 									onFilterChange={handleFilterChange}
+									onReset={onResetFilters}
 									minPrice={low.price}
 									maxPrice={high.price}
 								/>

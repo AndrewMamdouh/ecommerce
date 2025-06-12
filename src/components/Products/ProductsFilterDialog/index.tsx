@@ -13,6 +13,7 @@ import { Slider } from '@Components/ui/slider';
 import { Input } from '@Components/ui/input';
 import { useDebounceCallback } from 'usehooks-ts';
 import { useEffect, useState } from 'react';
+import { Button } from '@Components/ui/button';
 
 type ProductsFilterDialogProps = {
 	isOpen: boolean;
@@ -22,6 +23,7 @@ type ProductsFilterDialogProps = {
 	onFilterChange: ([key, value]:
 		| ['categories', string]
 		| ['price', Partial<Record<'min' | 'max', number>>]) => void;
+	onReset: VoidFunction;
 	minPrice: number;
 	maxPrice: number;
 };
@@ -32,6 +34,7 @@ const ProductsFilterDialog = ({
 	categories,
 	activeFilter,
 	onFilterChange,
+	onReset,
 	minPrice,
 	maxPrice
 }: ProductsFilterDialogProps) => {
@@ -41,6 +44,10 @@ const ProductsFilterDialog = ({
 	useEffect(() => {
 		debouncedOnFilterChange(['price', { ...price }]);
 	}, [price]);
+
+	useEffect(() => {
+		setPrice({ ...activeFilter.price });
+	}, [activeFilter.price.min, activeFilter.price.max]);
 
 	return (
 		<Dialog
@@ -59,9 +66,7 @@ const ProductsFilterDialog = ({
 					className="relative ml-auto flex size-full max-w-xs transform flex-col overflow-y-auto bg-white pt-4 pb-6 shadow-xl transition duration-300 ease-in-out data-closed:translate-x-full"
 				>
 					<div className="flex items-center justify-between px-4">
-						<h2 className="text-lg font-medium text-gray-900">
-							Filters
-						</h2>
+						<h2 className="font-medium text-gray-900">Filters</h2>
 						<button
 							type="button"
 							onClick={() => setIsOpen(false)}
@@ -74,14 +79,14 @@ const ProductsFilterDialog = ({
 					</div>
 
 					{/* Filters */}
-					<form className="mt-4 border-gray-200">
+					<form className="mt-4 border-gray-200 flex flex-col">
 						<Disclosure
 							as="div"
-							className="border-t border-gray-200 px-4 py-6"
+							className="border-t border-gray-200 px-4 py-2"
 						>
-							<h3 className="-mx-2 -my-3 flow-root">
-								<DisclosureButton className="group flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500">
-									<span className="font-medium text-gray-900">
+							<h3 className="">
+								<DisclosureButton className="group flex w-full items-center justify-between bg-white py-2 text-gray-400 hover:text-gray-500">
+									<span className="text-sm font-medium text-gray-900">
 										Category
 									</span>
 									<span className="ml-6 flex items-center">
@@ -101,14 +106,14 @@ const ProductsFilterDialog = ({
 									{categories.map((option, optionIdx) => (
 										<div
 											key={option}
-											className="flex gap-3"
+											className="flex gap-3 text-sm"
 										>
 											<div className="flex h-5 shrink-0 items-center">
 												<div className="group grid size-4 grid-cols-1">
 													<input
 														defaultValue={option}
 														id={`filter-mobile-${option}-${optionIdx}`}
-														name={`${option}[]`}
+														name={option}
 														type="checkbox"
 														checked={activeFilter?.categories.includes(
 															option
@@ -156,11 +161,11 @@ const ProductsFilterDialog = ({
 						</Disclosure>
 						<Disclosure
 							as="div"
-							className="border-t border-gray-200 px-4 py-6"
+							className="border-t border-gray-200 px-4 py-2"
 						>
-							<h3 className="-mx-2 -my-3 flow-root">
-								<DisclosureButton className="group flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500">
-									<span className="font-medium text-gray-900">
+							<h3>
+								<DisclosureButton className="group flex w-full items-center justify-between bg-white py-2 text-gray-400 hover:text-gray-500">
+									<span className="text-sm font-medium text-gray-900">
 										Price
 									</span>
 									<span className="ml-6 flex items-center">
@@ -180,19 +185,6 @@ const ProductsFilterDialog = ({
 									<Slider
 										min={minPrice}
 										max={maxPrice}
-										// value={[
-										// 	activeFilter.price.min,
-										// 	activeFilter.price.max
-										// ]}
-										// onValueChange={([min, max]) =>
-										// 	debouncedOnFilterChange([
-										// 		'price',
-										// 		{
-										// 			min,
-										// 			max
-										// 		}
-										// 	])
-										// }
 										value={[price.min, price.max]}
 										onValueChange={([min, max]) =>
 											setPrice({ min, max })
@@ -210,17 +202,6 @@ const ProductsFilterDialog = ({
 												id="min-price"
 												className="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
 												type="number"
-												// value={activeFilter.price.min}
-												// onChange={(e) =>
-												// 	debouncedOnFilterChange([
-												// 		'price',
-												// 		{
-												// 			min: Number(
-												// 				e.target.value
-												// 			)
-												// 		}
-												// 	])
-												// }
 												value={price.min}
 												onChange={(e) =>
 													setPrice((prevPrice) => ({
@@ -243,17 +224,6 @@ const ProductsFilterDialog = ({
 												id="max-price"
 												className="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
 												type="number"
-												// value={activeFilter.price.max}
-												// onChange={(e) =>
-												// 	debouncedOnFilterChange([
-												// 		'price',
-												// 		{
-												// 			max: Number(
-												// 				e.target.value
-												// 			)
-												// 		}
-												// 	])
-												// }
 												value={price.max}
 												onChange={(e) =>
 													setPrice((prevPrice) => ({
@@ -267,68 +237,16 @@ const ProductsFilterDialog = ({
 										</div>
 									</div>
 								</div>
-								{/* <div className="">
-									<label className="sr-only">
-										Example range
-									</label>
-									<div
-										id="hs-pass-values-to-inputs"
-										className="--prevent-on-load-init"
-										data-hs-range-slider={`{
-											"start": [250, 750],
-											"range": {
-												"min": 0,
-												"max": 1000
-											},
-											"connect": true,
-											"tooltips": true,
-											"formatter": "integer",
-											"cssClasses": {
-												"target": "relative h-2 rounded-full bg-gray-100 dark:bg-neutral-700",
-												"base": "size-full relative z-1",
-												"origin": "absolute top-0 end-0 size-full origin-[0_0] rounded-full",
-												"handle": "absolute top-1/2 end-0 size-4.5 bg-white border-4 border-blue-600 rounded-full cursor-pointer translate-x-2/4 -translate-y-2/4 dark:border-blue-500",
-												"connects": "relative z-0 size-full rounded-full overflow-hidden",
-												"connect": "absolute top-0 end-0 z-1 size-full bg-blue-600 origin-[0_0] dark:bg-blue-500",
-												"touchArea": "absolute -inset-1",
-												"tooltip": "bg-white border border-gray-200 text-sm text-gray-800 py-1 px-2 rounded-lg mb-3 absolute bottom-full start-2/4 -translate-x-2/4 dark:bg-neutral-800 dark:border-neutral-700 dark:text-white"
-											}
-										}`}
-									/>
-
-									<div className="flex flex-row space-x-4 mt-5">
-										<div className="basis-1/2">
-											<label
-												htmlFor="hs-pass-values-to-inputs-min-target"
-												className="block text-sm font-medium mb-2 dark:text-neutral-200"
-											>
-												Min price:
-											</label>
-											<input
-												id="hs-pass-values-to-inputs-min-target"
-												className="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-												type="number"
-												value="250"
-											/>
-										</div>
-										<div className="basis-1/2">
-											<label
-												htmlFor="hs-pass-values-to-inputs-max-target"
-												className="block text-sm font-medium mb-2 dark:text-neutral-200"
-											>
-												Max price:
-											</label>
-											<input
-												id="hs-pass-values-to-inputs-max-target"
-												className="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-												type="number"
-												value="750"
-											/>
-										</div>
-									</div>
-								</div> */}
 							</DisclosurePanel>
 						</Disclosure>
+						<Button
+							onClick={onReset}
+							variant="default"
+							type="button"
+							className="cursor-pointer h-auto mt-4 mx-4 grow text-white hover:text-white bg-slate-900 font-medium rounded-sm text-sm px-5 py-2.5 flex items-center justify-center hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-slate-400"
+						>
+							Reset
+						</Button>
 					</form>
 				</DialogPanel>
 			</div>

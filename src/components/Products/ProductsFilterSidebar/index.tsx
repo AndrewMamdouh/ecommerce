@@ -9,6 +9,7 @@ import { Input } from '@Components/ui/input';
 import { ProductsFilters } from '@Types';
 import { useEffect, useState } from 'react';
 import { useDebounceCallback } from 'usehooks-ts';
+import { Button } from '@Components/ui/button';
 
 type ProductsFilterSidebarProps = {
 	categories: string[];
@@ -16,6 +17,7 @@ type ProductsFilterSidebarProps = {
 	onFilterChange: ([key, value]:
 		| ['categories', string]
 		| ['price', Partial<Record<'min' | 'max', number>>]) => void;
+	onReset: VoidFunction;
 	minPrice: number;
 	maxPrice: number;
 };
@@ -24,6 +26,7 @@ const ProductsFilterSidebar = ({
 	categories,
 	activeFilter,
 	onFilterChange,
+	onReset,
 	minPrice,
 	maxPrice
 }: ProductsFilterSidebarProps) => {
@@ -33,6 +36,10 @@ const ProductsFilterSidebar = ({
 	useEffect(() => {
 		debouncedOnFilterChange(['price', { ...price }]);
 	}, [price]);
+
+	useEffect(() => {
+		setPrice({ ...activeFilter.price });
+	}, [activeFilter.price.min, activeFilter.price.max]);
 
 	return (
 		<>
@@ -62,7 +69,7 @@ const ProductsFilterSidebar = ({
 									<div className="group grid size-4 grid-cols-1">
 										<input
 											defaultValue={option}
-											defaultChecked={activeFilter?.categories.includes(
+											checked={activeFilter?.categories.includes(
 												option
 											)}
 											onChange={(e) =>
@@ -72,7 +79,7 @@ const ProductsFilterSidebar = ({
 												])
 											}
 											id={`filter-${option}-${optionIdx}`}
-											name={`${option}[]`}
+											name={option}
 											type="checkbox"
 											className="col-start-1 row-start-1 appearance-none rounded-sm border border-gray-300 bg-white checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
 										/>
@@ -180,6 +187,14 @@ const ProductsFilterSidebar = ({
 					</div>
 				</DisclosurePanel>
 			</Disclosure>
+			<Button
+				onClick={onReset}
+				variant="default"
+				type="button"
+				className="cursor-pointer h-auto mt-4 w-full text-white hover:text-white bg-slate-900 font-medium rounded-sm text-sm px-5 py-2.5 flex items-center justify-center hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-slate-400"
+			>
+				Reset
+			</Button>
 		</>
 	);
 };

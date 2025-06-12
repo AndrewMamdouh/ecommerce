@@ -101,16 +101,16 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
 								>
 									<path
 										stroke="currentColor"
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										stroke-width="2"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth="2"
 										d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"
 									/>
 								</svg>
 								Add to favorites
 							</Button>
 							<Button
-								variant="outline"
+								variant="default"
 								className="cursor-pointer h-auto text-white hover:text-white bg-slate-900 font-medium rounded-lg text-sm px-5 py-2.5 flex items-center justify-center hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-slate-400"
 							>
 								<svg
@@ -124,9 +124,9 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
 								>
 									<path
 										stroke="currentColor"
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										stroke-width="2"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth="2"
 										d="M4 4h1.5L8 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm.75-3H7.5M11 7H6.312M17 4v6m-3-3h6"
 									/>
 								</svg>
