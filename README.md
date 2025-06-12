@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛍️ Product Listing Interface – Frontend Assessment
 
-## Getting Started
+This project is a responsive product listing interface built with **Next.js** and **Tailwind CSS**, developed as part of a frontend assessment.
 
-First, run the development server:
+It consumes data from the [Fake Store API](https://fakestoreapi.com/) and demonstrates:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Project Overview
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- 📦 **Product Listing**: Products are displayed in a responsive grid with their image, title, price, and rating.
+- 🔍 **Filtering**: Users can filter products by category and a price range.
+- 🔗 **Routing**: Each product links to a dynamic route showing full product details.
+- 📱 **Responsiveness**: Optimized layout for desktop, tablet, and mobile views.
+- 🔍 **SEO**: Dynamic titles and meta descriptions using `next/head`, with JSON-LD structured data for products.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Framework**: Next.js (App Router)
+- **Styling**: Tailwind CSS
+- **Data Source**: [fakestoreapi.com](https://fakestoreapi.com/)
+- **Deployment**: [Vercel](https://ecommerce-sigma-coral.vercel.app/)
 
-## Learn More
+### Getting Started
 
-To learn more about Next.js, take a look at the following resources:
+1. Clone the repository to your local machine:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    ```bash
+    git clone https://github.com/AndrewMamdouh/ecommerce.git
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. Navigate to the project directory:
 
-## Deploy on Vercel
+    ```bash
+     cd ecommerce
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. Install required dependencies:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    ```bash
+     pnpm install
+    ```
+
+### Available Scripts
+
+-   #### Local Running
+
+    Runs it on local server:
+
+    ```bash
+     pnpm run dev
+    ```
+
+-   #### Linting
+
+    Checks for linting errors in the codebase:
+
+    ```bash
+     pnpm run link:check
+    ```
+
+    Fixes linting errors in the codebase:
+
+    ```bash
+     pnpm run lint:fix
+    ```
+
+-   #### Typings
+
+    Performs type checking:
+
+    ```bash
+     pnpm run type:check
+    ```
