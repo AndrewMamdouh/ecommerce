@@ -11,40 +11,14 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-	title: 'Your Next Store - Home',
+	title: 'Explore Products | Your Next Storefront',
 	description: 'Online Store to fulfill all of your needs',
 	icons: '/logo.svg'
 };
 
-// const getCategories = async () => {
-// 	try {
-// 		const axiosClient = getAxiosClient();
-// 		const { data } = await axiosClient.get<string[]>(
-// 			apiEndpoints.getCategories(),
-// 			{
-// 				fetchOptions: {
-// 					cache: 'force-cache'
-// 				}
-// 			}
-// 		);
-// 		return data
-// 			? { categories: data, hasError: false }
-// 			: {
-// 					categories: [],
-// 					hasError: true
-// 				};
-// 	} catch (_) {
-// 		return {
-// 			categories: [],
-// 			hasError: true
-// 		};
-// 	}
-// };
-
 export default async function RootLayout({
 	children
 }: Readonly<{ children: React.ReactNode }>) {
-	// const { categories } = await getCategories();
 	return (
 		<html
 			lang="en"

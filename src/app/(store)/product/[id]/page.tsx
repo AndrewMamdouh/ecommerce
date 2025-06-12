@@ -5,6 +5,11 @@ import { JsonSchema, ProductDetails } from '@Components';
 import { getProductJson } from '@Components/JsonSchema';
 import { Product } from '@Types';
 import { notFound } from 'next/navigation';
+import { Metadata } from 'next';
+
+type Props = {
+	params: Promise<{ id: string }>;
+};
 
 const getProduct = async (id: string) => {
 	try {
@@ -26,11 +31,19 @@ const getProduct = async (id: string) => {
 	}
 };
 
-export default async function Page({
-	params
-}: {
-	params: Promise<{ id: string }>;
-}) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+	const { id } = await params;
+	const { product } = await getProduct(id);
+
+	if (!product) return {};
+
+	return {
+		title: `${product.title} | Your Next Storefront`,
+		description: `Discover details about ${product.title} including price, category, and description.`
+	};
+}
+
+export default async function Page({ params }: Props) {
 	const { id } = await params;
 	const { product } = await getProduct(id);
 	if (!id || !product) notFound();
