@@ -36,8 +36,8 @@ const ProductsFilterSidebar = ({
 
 	return (
 		<>
-			<Disclosure as="div" className="border-b border-gray-200 py-6">
-				<h3 className="-my-3 flow-root">
+			<Disclosure as="div" className="border-b border-gray-200 py-2">
+				<h3>
 					<DisclosureButton className="group flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
 						<span className="font-medium text-gray-900">
 							Category
@@ -109,9 +109,9 @@ const ProductsFilterSidebar = ({
 					</div>
 				</DisclosurePanel>
 			</Disclosure>
-			<Disclosure as="div" className="border-b border-gray-200 px-4 py-6">
-				<h3 className="-mx-2 -my-3 flow-root">
-					<DisclosureButton className="group flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500">
+			<Disclosure as="div" className="border-b border-gray-200 py-2">
+				<h3>
+					<DisclosureButton className="group flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
 						<span className="font-medium text-gray-900">Price</span>
 						<span className="ml-6 flex items-center">
 							<PlusIcon

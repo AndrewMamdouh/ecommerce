@@ -14,7 +14,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
 		<section className="grow py-32 bg-white antialiased mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 			<div className="max-w-screen-xl px-4 mx-auto 2xl:px-0">
 				<div className="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
-					<div className="shrink-0 max-w-md mx-auto">
+					<div className="shrink-0 max-w-sm mx-auto">
 						<Image
 							className="object-contain transition-opacity opacity-0 duration-[2s]"
 							onLoad={(e) =>
@@ -111,7 +111,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
 							</Button>
 							<Button
 								variant="outline"
-								className="cursor-pointer h-auto text-white hover:text-white bg-cyan-600 hover:bg-cyan-700 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none flex items-center justify-center"
+								className="cursor-pointer h-auto text-white hover:text-white bg-slate-900 font-medium rounded-lg text-sm px-5 py-2.5 flex items-center justify-center hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-slate-400"
 							>
 								<svg
 									className="size-5"

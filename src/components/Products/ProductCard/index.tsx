@@ -33,7 +33,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 			</Link>
 			<div className="mt-4 px-5 pb-5">
 				<Link href={`/product/${product.id}`}>
-					<h5 className="text-lg sm:text-xl tracking-tight text-slate-900">
+					<h5 className="tracking-tight text-slate-900">
 						{product.title}
 					</h5>
 				</Link>
@@ -72,15 +72,15 @@ const ProductCard = ({ product }: ProductCardProps) => {
 						</span>
 					</div>
 					<p>
-						<span className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900">
+						<span className="text-xl font-bold text-slate-900">
 							${product.price}
 						</span>
 					</p>
 				</div>
-				<button className="cursor-pointer flex items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-slate-400">
+				<button className="cursor-pointer flex items-center justify-center rounded-md bg-slate-900 px-4 py-2 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-slate-400">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
-						className="mr-2 h-6 w-6"
+						className="mr-2 size-5"
 						fill="none"
 						viewBox="0 0 24 24"
 						stroke="currentColor"
