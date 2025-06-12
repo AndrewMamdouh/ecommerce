@@ -102,7 +102,7 @@ const ProductsFilterDialog = ({
 								</DisclosureButton>
 							</h3>
 							<DisclosurePanel className="pt-6">
-								<div className="space-y-6">
+								<div className="space-y-4">
 									{categories.map((option, optionIdx) => (
 										<div
 											key={option}
