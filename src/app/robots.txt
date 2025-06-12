@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://ecommerce-sigma-coral.vercel.app/sitemap.xml
