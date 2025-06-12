@@ -1,5 +1,6 @@
 import { Product } from '@Types';
 import Image from 'next/image';
+import Link from 'next/link';
 
 type ProductCardProps = {
 	product: Product;
@@ -9,9 +10,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
 	const ratingActiveStars = Math.floor(product.rating.rate);
 	return (
 		<li className="relative flex w-full flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
-			<a
+			<Link
+				href={`/product/${product.id}`}
 				className="relative mx-3 mt-3 flex max-h-64 overflow-hidden rounded-xl"
-				href="#"
 			>
 				<Image
 					className="object-contain transition-opacity opacity-0 duration-[2s]"
@@ -29,13 +30,13 @@ const ProductCard = ({ product }: ProductCardProps) => {
 					width={500}
 					height={500}
 				/>
-			</a>
+			</Link>
 			<div className="mt-4 px-5 pb-5">
-				<a href="#">
+				<Link href={`/product/${product.id}`}>
 					<h5 className="text-lg sm:text-xl tracking-tight text-slate-900">
 						{product.title}
 					</h5>
-				</a>
+				</Link>
 				<div className="mt-2 mb-5 flex flex-col gap-4 justify-center">
 					<div className="flex items-center">
 						{Array(ratingActiveStars)

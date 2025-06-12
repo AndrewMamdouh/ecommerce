@@ -2,8 +2,8 @@ import type {
 	ItemList,
 	Product as SchemaProduct,
 	Thing,
-	WithContext,
-	CollectionPage
+	WithContext
+	// CollectionPage
 } from 'schema-dts';
 import { Product } from '@Types';
 
@@ -54,48 +54,48 @@ export const getProductsJson = (
 	};
 };
 
-export const getCategoryProductsJson = (
-	categoryName: string,
-	products: Product[]
-): WithContext<CollectionPage> => {
-	return {
-		'@context': 'https://schema.org',
-		'@type': 'CollectionPage',
-		name: categoryName,
-		url: `${process.env.NEXT_PUBLIC_CLIENT}/${categoryName}`,
-		mainEntity: {
-			'@type': 'ItemList',
-			name: `${categoryName} Products`,
-			numberOfItems: products.length,
-			itemListElement: products.map((product, idx) => ({
-				position: idx + 1,
-				...getProductJson(product)
-			}))
-		}
-	};
-};
+// export const getCategoryProductsJson = (
+// 	categoryName: string,
+// 	products: Product[]
+// ): WithContext<CollectionPage> => {
+// 	return {
+// 		'@context': 'https://schema.org',
+// 		'@type': 'CollectionPage',
+// 		name: categoryName,
+// 		url: `${process.env.NEXT_PUBLIC_CLIENT}/${categoryName}`,
+// 		mainEntity: {
+// 			'@type': 'ItemList',
+// 			name: `${categoryName} Products`,
+// 			numberOfItems: products.length,
+// 			itemListElement: products.map((product, idx) => ({
+// 				position: idx + 1,
+// 				...getProductJson(product)
+// 			}))
+// 		}
+// 	};
+// };
 
-export const getCategoriesJson = (
-	categories: string[]
-): WithContext<CollectionPage> => ({
-	'@context': 'https://schema.org',
-	'@type': 'CollectionPage',
-	name: 'All Categories',
-	url: `${process.env.NEXT_PUBLIC_CLIENT}/categories`,
-	mainEntity: {
-		'@type': 'ItemList',
-		name: 'Product Categories',
-		numberOfItems: categories.length,
-		itemListElement: categories.map((category, idx) => ({
-			'@type': 'ListItem',
-			position: idx + 1,
-			item: {
-				'@type': 'ProductCollection',
-				name: category,
-				url: `${process.env.NEXT_PUBLIC_CLIENT}/${category}`
-			}
-		}))
-	}
-});
+// export const getCategoriesJson = (
+// 	categories: string[]
+// ): WithContext<CollectionPage> => ({
+// 	'@context': 'https://schema.org',
+// 	'@type': 'CollectionPage',
+// 	name: 'All Categories',
+// 	url: `${process.env.NEXT_PUBLIC_CLIENT}/categories`,
+// 	mainEntity: {
+// 		'@type': 'ItemList',
+// 		name: 'Product Categories',
+// 		numberOfItems: categories.length,
+// 		itemListElement: categories.map((category, idx) => ({
+// 			'@type': 'ListItem',
+// 			position: idx + 1,
+// 			item: {
+// 				'@type': 'ProductCollection',
+// 				name: category,
+// 				url: `${process.env.NEXT_PUBLIC_CLIENT}/${category}`
+// 			}
+// 		}))
+// 	}
+// });
 
 export default JsonSchema;
